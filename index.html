@@ -1,90 +1,110 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Bienvenido a Deluxe Shop, tu tienda de productos destacados.">
     <meta name="keywords" content="tienda, productos, Deluxe Shop, e-commerce">
+    <meta name="author" content="Deluxe Shop">
+    <title>Deluxe Shop - Tienda de Productos</title>
+    <!-- Vinculación a hojas de estilo -->
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="new-styles.css"> 
-    <title>Tienda de Productos</title>
+    <link rel="stylesheet" href="new-styles.css">
 </head>
+
 <body>
     <header>
         <h1>Deluxe Shop</h1>
-        
-        <a href="https://wa.me/541125270020" target="_blank">WhatsApp</a>
+        <a href="https://wa.me/541125270020" target="_blank" aria-label="Contactar por WhatsApp">
+            WhatsApp
+        </a>
         <nav>
-            <a href="login.html">Iniciar Sesión</a>
-            <a href="register.html">Registrarse</a>
-            <a href="customer-service.html">Atención al Cliente</a>
+            <ul>
+                <li><a href="login.html" aria-label="Iniciar sesión">Iniciar Sesión</a></li>
+                <li><a href="register.html" aria-label="Registrarse">Registrarse</a></li>
+                <li><a href="customer-service.html" aria-label="Atención al cliente">Atención al Cliente</a></li>
+            </ul>
         </nav>
     </header>
-    <section class="featured-products">
-        <h2>Conoce los productos destacados</h2>
-        <div class="product-grid">
-            <div class="product">
-                <h3>Producto 1</h3>
-                <p>$60.000</p>
-                <button>Añadir al carrito</button>
+
+    <main>
+        <section class="featured-products">
+            <h2>Conoce los productos destacados</h2>
+            <div class="product-grid">
+                <!-- Producto repetido, se recomienda reutilizar con un bucle o plantilla -->
+                <article class="product">
+                    <h3>Producto 1</h3>
+                    <p class="price">$60.000</p>
+                    <button class="add-to-cart">Añadir al carrito</button>
+                </article>
+                <article class="product">
+                    <h3>Producto 2</h3>
+                    <p class="price">$24.000</p>
+                    <button class="add-to-cart">Añadir al carrito</button>
+                </article>
+                <article class="product">
+                    <h3>Producto 3</h3>
+                    <p class="price">$6.000</p>
+                    <button class="add-to-cart">Añadir al carrito</button>
+                </article>
+                <article class="product">
+                    <h3>Producto 4</h3>
+                    <p class="price">$14.900</p>
+                    <button class="add-to-cart">Añadir al carrito</button>
+                </article>
+                <article class="product">
+                    <h3>Producto 5</h3>
+                    <p class="price">$22.800</p>
+                    <button class="add-to-cart">Añadir al carrito</button>
+                </article>
+                <article class="product">
+                    <h3>Producto 6</h3>
+                    <p class="price">$30.200</p>
+                    <button class="add-to-cart">Añadir al carrito</button>
+                </article>
             </div>
-            <div class="product">
-                <h3>Producto 2</h3>
-                <p>$24.000</p>
-                <button>Añadir al carrito</button>
-            </div>
-            <div class="product">
-                <h3>Producto 3</h3>
-                <p>$6.000</p>
-                <button>Añadir al carrito</button>
-            </div>
-            <div class="product">
-                <h3>Producto 4</h3>
-                <p>$14.900</p>
-                <button>Añadir al carrito</button>
-            </div>
-            <div class="product">
-                <h3>Producto 5</h3>
-                <p>$22.800</p>
-                <button>Añadir al carrito</button>
-            </div>
-            <div class="product">
-                <h3>Producto 6</h3>
-                <p>$30.200</p>
-                <button>Añadir al carrito</button>
-            </div>
-        </div>
-    </section>
-    <section class="subscribe">
-        <h2>Suscríbete y entérate de todo</h2>
-        <form id="subscribe-form">
-            <input type="email" id="email-input" placeholder="Escribe tu correo" required>
-            <button type="submit">Enviar</button>
-        </form>
-    </section>
+        </section>
+
+        <section class="subscribe">
+            <h2>Suscríbete y entérate de todo</h2>
+            <form id="subscribe-form">
+                <label for="email-input">Introduce tu correo electrónico:</label>
+                <input type="email" id="email-input" placeholder="Escribe tu correo" required aria-describedby="email-info">
+                <button type="submit">Enviar</button>
+                <small id="email-info">Recibe nuestras últimas noticias y ofertas.</small>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Deluxe Shop. Todos los derechos reservados.</p>
+    </footer>
+
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
+        document.addEventListener("DOMContentLoaded", function () {
             const form = document.getElementById("subscribe-form");
             const emailInput = document.getElementById("email-input");
-            
-            form.addEventListener("submit", function(event) {
-                event.preventDefault(); 
-                
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+
                 const email = emailInput.value;
-                
+
                 if (email) {
                     alert(`Gracias por suscribirte con el correo: ${email}`);
-                    logEmail(email); 
-                    form.reset(); 
+                    logEmail(email); // Imprimir el correo en consola
+                    form.reset();
                 } else {
                     alert("Por favor, ingresa un correo electrónico válido.");
                 }
             });
-            
+
             function logEmail(email) {
-                console.log(`Email submitted: ${email}`);
+                console.log(`Email enviado: ${email}`);
             }
         });
     </script>
 </body>
+
 </html>
