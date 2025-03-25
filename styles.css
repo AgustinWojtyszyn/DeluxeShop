@@ -105,4 +105,14 @@ button:hover {
 
 .subscribe button {
     padding: 10px 20px; /* Larger button */
+    background-color: #ff5722; /* Matching color with header */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Hover effect */
+}
+
+.subscribe button:hover {
+    background-color: #e64a19; /* Darker shade for hover effect */
 }
