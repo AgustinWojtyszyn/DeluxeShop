@@ -1,110 +1,292 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Bienvenido a Deluxe Shop, tu tienda de productos destacados.">
-    <meta name="keywords" content="tienda, productos, Deluxe Shop, e-commerce">
-    <meta name="author" content="Deluxe Shop">
-    <title>Deluxe Shop - Tienda de Productos</title>
-    <!-- Vinculación a hojas de estilo -->
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="new-styles.css">
+    <title>ModaFicticia - Tienda de Ropa</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .card {
+            transition: transform 0.3s;
+            margin-bottom: 20px;
+        }
+        .card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .hero-section {
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 100px 0;
+            margin-bottom: 30px;
+        }
+        .footer {
+            background-color: #343a40;
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        .product-img {
+            height: 300px;
+            object-fit: cover;
+        }
+    </style>
 </head>
-
 <body>
-    <header>
-        <h1>Deluxe Shop</h1>
-        <a href="https://wa.me/541125270020" target="_blank" aria-label="Contactar por WhatsApp">
-            WhatsApp
-        </a>
-        <nav>
-            <ul>
-                <li><a href="login.html" aria-label="Iniciar sesión">Iniciar Sesión</a></li>
-                <li><a href="register.html" aria-label="Registrarse">Registrarse</a></li>
-                <li><a href="customer-service.html" aria-label="Atención al cliente">Atención al Cliente</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <main>
-        <section class="featured-products">
-            <h2>Conoce los productos destacados</h2>
-            <div class="product-grid">
-                <!-- Producto repetido, se recomienda reutilizar con un bucle o plantilla -->
-                <article class="product">
-                    <h3>Producto 1</h3>
-                    <p class="price">$60.000</p>
-                    <button class="add-to-cart">Añadir al carrito</button>
-                </article>
-                <article class="product">
-                    <h3>Producto 2</h3>
-                    <p class="price">$24.000</p>
-                    <button class="add-to-cart">Añadir al carrito</button>
-                </article>
-                <article class="product">
-                    <h3>Producto 3</h3>
-                    <p class="price">$6.000</p>
-                    <button class="add-to-cart">Añadir al carrito</button>
-                </article>
-                <article class="product">
-                    <h3>Producto 4</h3>
-                    <p class="price">$14.900</p>
-                    <button class="add-to-cart">Añadir al carrito</button>
-                </article>
-                <article class="product">
-                    <h3>Producto 5</h3>
-                    <p class="price">$22.800</p>
-                    <button class="add-to-cart">Añadir al carrito</button>
-                </article>
-                <article class="product">
-                    <h3>Producto 6</h3>
-                    <p class="price">$30.200</p>
-                    <button class="add-to-cart">Añadir al carrito</button>
-                </article>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">ModaFicticia</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Hombres</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Mujeres</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Niños</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Ofertas</a>
+                    </li>
+                </ul>
+                <div class="d-flex">
+                    <a href="#" class="btn btn-outline-light me-2"><i class="fas fa-search"></i></a>
+                    <a href="#" class="btn btn-outline-light me-2"><i class="fas fa-user"></i></a>
+                    <a href="#" class="btn btn-outline-light"><i class="fas fa-shopping-cart"></i></a>
+                </div>
             </div>
-        </section>
+        </div>
+    </nav>
 
-        <section class="subscribe">
-            <h2>Suscríbete y entérate de todo</h2>
-            <form id="subscribe-form">
-                <label for="email-input">Introduce tu correo electrónico:</label>
-                <input type="email" id="email-input" placeholder="Escribe tu correo" required aria-describedby="email-info">
-                <button type="submit">Enviar</button>
-                <small id="email-info">Recibe nuestras últimas noticias y ofertas.</small>
+    <!-- Hero Section -->
+    <section class="hero-section text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold">Nueva Colección 2023</h1>
+            <p class="lead">Descubre las últimas tendencias en moda</p>
+            <a href="#" class="btn btn-primary btn-lg">Comprar Ahora</a>
+        </div>
+    </section>
+
+    <!-- Productos Destacados -->
+    <section class="container mb-5">
+        <h2 class="text-center mb-4">Productos Destacados</h2>
+        <div class="row">
+            <!-- Producto 1 -->
+            <div class="col-md-4 col-sm-6">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="card-img-top product-img" alt="Camisa para hombre">
+                    <div class="card-body">
+                        <h5 class="card-title">Camisa Elegante</h5>
+                        <p class="card-text">Camisa de vestir para hombre en algodón premium.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="h5">$29.99</span>
+                            <a href="#" class="btn btn-primary">Añadir al carrito</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Producto 2 -->
+            <div class="col-md-4 col-sm-6">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="card-img-top product-img" alt="Vestido de mujer">
+                    <div class="card-body">
+                        <h5 class="card-title">Vestido Floral</h5>
+                        <p class="card-text">Vestido de verano con estampado floral para mujer.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="h5">$39.99</span>
+                            <a href="#" class="btn btn-primary">Añadir al carrito</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Producto 3 -->
+            <div class="col-md-4 col-sm-6">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="card-img-top product-img" alt="Jeans para hombre">
+                    <div class="card-body">
+                        <h5 class="card-title">Jeans Clásicos</h5>
+                        <p class="card-text">Jeans de corte recto para hombre en color azul.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="h5">$49.99</span>
+                            <a href="#" class="btn btn-primary">Añadir al carrito</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Producto 4 -->
+            <div class="col-md-4 col-sm-6">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="card-img-top product-img" alt="Abrigo de mujer">
+                    <div class="card-body">
+                        <h5 class="card-title">Abrigo Invierno</h5>
+                        <p class="card-text">Abrigo cálido para mujer para los días fríos.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="h5">$79.99</span>
+                            <a href="#" class="btn btn-primary">Añadir al carrito</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Producto 5 -->
+            <div class="col-md-4 col-sm-6">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1527719327859-c6ce80353573?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="card-img-top product-img" alt="Zapatos deportivos">
+                    <div class="card-body">
+                        <h5 class="card-title">Zapatos Deportivos</h5>
+                        <p class="card-text">Zapatillas cómodas para correr o caminar.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="h5">$59.99</span>
+                            <a href="#" class="btn btn-primary">Añadir al carrito</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Producto 6 -->
+            <div class="col-md-4 col-sm-6">
+                <div class="card">
+                    <img src="https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="card-img-top product-img" alt="Bolso de mujer">
+                    <div class="card-body">
+                        <h5 class="card-title">Bolso Elegante</h5>
+                        <p class="card-text">Bolso de mano para mujer en cuero sintético.</p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <span class="h5">$45.99</span>
+                            <a href="#" class="btn btn-primary">Añadir al carrito</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center mt-4">
+            <a href="#" class="btn btn-outline-primary">Ver todos los productos</a>
+        </div>
+    </section>
+
+    <!-- Categorías -->
+    <section class="container mb-5">
+        <h2 class="text-center mb-4">Explora por Categoría</h2>
+        <div class="row">
+            <div class="col-md-4 mb-4">
+                <div class="card text-white">
+                    <img src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="card-img" alt="Ropa para hombre">
+                    <div class="card-img-overlay d-flex flex-column justify-content-end bg-dark bg-opacity-50">
+                        <h3 class="card-title">Hombre</h3>
+                        <a href="#" class="btn btn-outline-light align-self-start">Ver más</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card text-white">
+                    <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="card-img" alt="Ropa para mujer">
+                    <div class="card-img-overlay d-flex flex-column justify-content-end bg-dark bg-opacity-50">
+                        <h3 class="card-title">Mujer</h3>
+                        <a href="#" class="btn btn-outline-light align-self-start">Ver más</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card text-white">
+                    <img src="https://images.unsplash.com/photo-1519238263530-99bdd11dfd76?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="card-img" alt="Ropa para niños">
+                    <div class="card-img-overlay d-flex flex-column justify-content-end bg-dark bg-opacity-50">
+                        <h3 class="card-title">Niños</h3>
+                        <a href="#" class="btn btn-outline-light align-self-start">Ver más</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="bg-light py-5">
+        <div class="container text-center">
+            <h2 class="mb-4">Suscríbete a nuestro boletín</h2>
+            <p class="lead mb-4">Recibe ofertas exclusivas y novedades directamente en tu correo.</p>
+            <form class="row justify-content-center">
+                <div class="col-md-6 col-lg-4 mb-2">
+                    <input type="email" class="form-control" placeholder="Tu correo electrónico">
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-primary w-100">Suscribirse</button>
+                </div>
             </form>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <footer>
-        <p>&copy; 2025 Deluxe Shop. Todos los derechos reservados.</p>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <h5>ModaFicticia</h5>
+                    <p>Tu tienda de moda online con las mejores prendas a precios increíbles.</p>
+                    <div class="social-icons">
+                        <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5>Comprar</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Hombres</a></li>
+                        <li><a href="#" class="text-white">Mujeres</a></li>
+                        <li><a href="#" class="text-white">Niños</a></li>
+                        <li><a href="#" class="text-white">Ofertas</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-2 mb-4">
+                    <h5>Información</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Sobre nosotros</a></li>
+                        <li><a href="#" class="text-white">Contacto</a></li>
+                        <li><a href="#" class="text-white">Blog</a></li>
+                        <li><a href="#" class="text-white">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <h5>Contacto</h5>
+                    <ul class="list-unstyled">
+                        <li><i class="fas fa-map-marker-alt me-2"></i> Calle Ficticia 123, Ciudad</li>
+                        <li><i class="fas fa-phone me-2"></i> +1 234 567 890</li>
+                        <li><i class="fas fa-envelope me-2"></i> info@modaficticia.com</li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="my-4 bg-light">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="mb-0">&copy; 2023 ModaFicticia. Todos los derechos reservados.</p>
+                </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="#" class="text-white me-3">Términos y condiciones</a>
+                    <a href="#" class="text-white">Política de privacidad</a>
+                </div>
+            </div>
+        </div>
     </footer>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const form = document.getElementById("subscribe-form");
-            const emailInput = document.getElementById("email-input");
-
-            form.addEventListener("submit", function (event) {
-                event.preventDefault();
-
-                const email = emailInput.value;
-
-                if (email) {
-                    alert(`Gracias por suscribirte con el correo: ${email}`);
-                    logEmail(email); // Imprimir el correo en consola
-                    form.reset();
-                } else {
-                    alert("Por favor, ingresa un correo electrónico válido.");
-                }
-            });
-
-            function logEmail(email) {
-                console.log(`Email enviado: ${email}`);
-            }
-        });
-    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
-
 </html>
