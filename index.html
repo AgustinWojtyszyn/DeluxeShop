@@ -4,46 +4,102 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ModaFicticia - Tienda de Ropa</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- Preload de recursos críticos -->
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    </noscript>
+    <!-- Preconnect para dominios externos -->
+    <link rel="preconnect" href="https://cdn.jsdelivr.net">
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="preconnect" href="https://images.unsplash.com">
     <style>
-        .card { transition: transform 0.3s, box-shadow 0.3s; margin-bottom: 20px; }
-        .card:hover { transform: scale(1.03); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        .navbar-brand { font-weight: bold; font-size: 1.5rem; }
+        :root {
+            --primary-color: #0d6efd;
+            --secondary-color: #343a40;
+            --hover-scale: 1.03;
+            --transition-speed: 0.3s;
+        }
+        
+        .card {
+            transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+            margin-bottom: 20px;
+            will-change: transform, box-shadow;
+        }
+        .card:hover {
+            transform: scale(var(--hover-scale));
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
         .hero-section { 
             background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), 
                         url('https://images.unsplash.com/photo-1483985988355-763728e1935b?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
-            background-size: cover; background-position: center; color: white; 
-            padding: 100px 0; margin-bottom: 30px; 
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: white;
+            padding: 100px 0;
+            margin-bottom: 30px;
         }
-        .footer { background-color: #343a40; color: white; padding: 30px 0; margin-top: 50px; }
-        .product-img { height: 300px; object-fit: cover; }
-        .card-img-overlay { background-color: rgba(0, 0, 0, 0.5); }
-        .social-icons a { transition: color 0.3s; }
-        .social-icons a:hover { color: #0d6efd!important; }
+        .footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 30px 0;
+            margin-top: 50px;
+        }
+        .product-img {
+            height: 300px;
+            object-fit: cover;
+            width: 100%;
+        }
+        .card-img-overlay {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .social-icons a {
+            transition: color var(--transition-speed);
+            display: inline-block;
+        }
+        .social-icons a:hover {
+            color: var(--primary-color)!important;
+        }
+        
+        /* Optimización para móviles */
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 60px 0;
+            }
+            .product-img {
+                height: 200px;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
         <div class="container">
-            <a class="navbar-brand" href="#">ModaFicticia</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <a class="navbar-brand" href="#" aria-label="ModaFicticia - Inicio">ModaFicticia</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="#" aria-current="page">Inicio</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Hombres</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Mujeres</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Niños</a></li>
                     <li class="nav-item"><a class="nav-link" href="#">Ofertas</a></li>
                 </ul>
                 <div class="d-flex">
-                    <button class="btn btn-outline-light me-2 search-btn"><i class="fas fa-search"></i></button>
-                    <a href="#" class="btn btn-outline-light me-2"><i class="fas fa-user"></i></a>
-                    <button class="btn btn-outline-light cart-btn" data-bs-toggle="modal" data-bs-target="#cartModal">
-                        <i class="fas fa-shopping-cart"></i> <span class="cart-count">0</span>
+                    <button class="btn btn-outline-light me-2 search-btn" aria-label="Buscar"><i class="fas fa-search" aria-hidden="true"></i></button>
+                    <a href="#" class="btn btn-outline-light me-2" aria-label="Mi cuenta"><i class="fas fa-user" aria-hidden="true"></i></a>
+                    <button class="btn btn-outline-light cart-btn" data-bs-toggle="modal" data-bs-target="#cartModal" aria-label="Carrito de compras">
+                        <i class="fas fa-shopping-cart" aria-hidden="true"></i> <span class="cart-count">0</span>
                     </button>
                 </div>
             </div>
@@ -76,7 +132,7 @@
         <div class="row">
             <div class="col-md-4 mb-4">
                 <div class="card text-white category-card" data-category="men">
-                    <img src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="card-img" alt="Ropa para hombre">
+                    <img src="https://images.unsplash.com/photo-1598033129183-c4f50c736f10?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="card-img" alt="Ropa para hombre" loading="lazy">
                     <div class="card-img-overlay d-flex flex-column justify-content-end">
                         <h3 class="card-title">Hombre</h3>
                         <button class="btn btn-outline-light align-self-start view-category">Ver más</button>
@@ -85,7 +141,7 @@
             </div>
             <div class="col-md-4 mb-4">
                 <div class="card text-white category-card" data-category="women">
-                    <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="card-img" alt="Ropa para mujer">
+                    <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="card-img" alt="Ropa para mujer" loading="lazy">
                     <div class="card-img-overlay d-flex flex-column justify-content-end">
                         <h3 class="card-title">Mujer</h3>
                         <button class="btn btn-outline-light align-self-start view-category">Ver más</button>
@@ -94,7 +150,7 @@
             </div>
             <div class="col-md-4 mb-4">
                 <div class="card text-white category-card" data-category="kids">
-                    <img src="https://images.unsplash.com/photo-1519238263530-99bdd11dfd76?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="card-img" alt="Ropa para niños">
+                    <img src="https://images.unsplash.com/photo-1519238263530-99bdd11dfd76?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80" class="card-img" alt="Ropa para niños" loading="lazy">
                     <div class="card-img-overlay d-flex flex-column justify-content-end">
                         <h3 class="card-title">Niños</h3>
                         <button class="btn btn-outline-light align-self-start view-category">Ver más</button>
@@ -109,9 +165,9 @@
         <div class="container text-center">
             <h2 class="mb-4">Suscríbete a nuestro boletín</h2>
             <p class="lead mb-4">Recibe ofertas exclusivas y novedades directamente en tu correo.</p>
-            <form class="row justify-content-center" id="newsletterForm">
+            <form class="row justify-content-center" id="newsletterForm" novalidate>
                 <div class="col-md-6 col-lg-4 mb-2">
-                    <input type="email" class="form-control" placeholder="Tu correo electrónico" required>
+                    <input type="email" class="form-control" placeholder="Tu correo electrónico" required aria-label="Correo electrónico para suscripción">
                 </div>
                 <div class="col-md-2">
                     <button type="submit" class="btn btn-primary w-100">Suscribirse</button>
@@ -128,10 +184,10 @@
                     <h5>ModaFicticia</h5>
                     <p>Tu tienda de moda online con las mejores prendas a precios increíbles.</p>
                     <div class="social-icons">
-                        <a href="#" class="text-white me-2"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="text-white me-2"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="text-white me-2"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="text-white"><i class="fab fa-pinterest"></i></a>
+                        <a href="#" class="text-white me-2" aria-label="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+                        <a href="#" class="text-white me-2" aria-label="Twitter"><i class="fab fa-twitter" aria-hidden="true"></i></a>
+                        <a href="#" class="text-white me-2" aria-label="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+                        <a href="#" class="text-white" aria-label="Pinterest"><i class="fab fa-pinterest" aria-hidden="true"></i></a>
                     </div>
                 </div>
                 <div class="col-md-2 mb-4">
@@ -154,11 +210,11 @@
                 </div>
                 <div class="col-md-4 mb-4">
                     <h5>Contacto</h5>
-                    <ul class="list-unstyled">
-                        <li><i class="fas fa-map-marker-alt me-2"></i> Calle Ficticia 123, Ciudad</li>
-                        <li><i class="fas fa-phone me-2"></i> +1 234 567 890</li>
-                        <li><i class="fas fa-envelope me-2"></i> info@modaficticia.com</li>
-                    </ul>
+                    <address class="list-unstyled">
+                        <div><i class="fas fa-map-marker-alt me-2"></i> Calle Ficticia 123, Ciudad</div>
+                        <div><i class="fas fa-phone me-2"></i> +1 234 567 890</div>
+                        <div><i class="fas fa-envelope me-2"></i> info@modaficticia.com</div>
+                    </address>
                 </div>
             </div>
             <hr class="my-4 bg-light">
@@ -175,11 +231,11 @@
     </footer>
 
     <!-- Modal del Carrito -->
-    <div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-hidden="true" aria-labelledby="cartModalLabel">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Tu Carrito de Compras</h5>
+                    <h5 class="modal-title" id="cartModalLabel">Tu Carrito de Compras</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -196,17 +252,17 @@
     </div>
 
     <!-- Modal de Búsqueda -->
-    <div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true">
+    <div class="modal fade" id="searchModal" tabindex="-1" aria-hidden="true" aria-labelledby="searchModalLabel">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Buscar Productos</h5>
+                    <h5 class="modal-title" id="searchModalLabel">Buscar Productos</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="searchForm">
                         <div class="input-group mb-3">
-                            <input type="text" class="form-control" placeholder="Buscar productos..." required>
+                            <input type="search" class="form-control" placeholder="Buscar productos..." required aria-label="Buscar productos">
                             <button class="btn btn-primary" type="submit">Buscar</button>
                         </div>
                     </form>
@@ -215,253 +271,298 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Cargar scripts de forma asíncrona -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" async defer></script>
+    
     <script>
-        // Datos de productos
-        const products = [
-            {
-                id: 1,
-                name: "Camisa Elegante",
-                description: "Camisa de vestir para hombre en algodón premium.",
-                price: 29.99,
-                image: "https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-                category: "men"
-            },
-            {
-                id: 2,
-                name: "Vestido Floral",
-                description: "Vestido de verano con estampado floral para mujer.",
-                price: 39.99,
-                image: "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-                category: "women"
-            },
-            {
-                id: 3,
-                name: "Jeans Clásicos",
-                description: "Jeans de corte recto para hombre en color azul.",
-                price: 49.99,
-                image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-                category: "men"
-            },
-            {
-                id: 4,
-                name: "Abrigo Invierno",
-                description: "Abrigo cálido para mujer para los días fríos.",
-                price: 79.99,
-                image: "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-                category: "women"
-            },
-            {
-                id: 5,
-                name: "Zapatos Deportivos",
-                description: "Zapatillas cómodas para correr o caminar.",
-                price: 59.99,
-                image: "https://images.unsplash.com/photo-1527719327859-c6ce80353573?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-                category: "unisex"
-            },
-            {
-                id: 6,
-                name: "Bolso Elegante",
-                description: "Bolso de mano para mujer en cuero sintético.",
-                price: 45.99,
-                image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
-                category: "women"
-            }
-        ];
+        // Patrón Module para organizar el código
+        const ModaFicticia = (() => {
+            // Datos de productos
+            const products = [
+                {
+                    id: 1,
+                    name: "Camisa Elegante",
+                    description: "Camisa de vestir para hombre en algodón premium.",
+                    price: 29.99,
+                    image: "https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+                    category: "men"
+                },
+                {
+                    id: 2,
+                    name: "Vestido Floral",
+                    description: "Vestido de verano con estampado floral para mujer.",
+                    price: 39.99,
+                    image: "https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+                    category: "women"
+                },
+                {
+                    id: 3,
+                    name: "Jeans Clásicos",
+                    description: "Jeans de corte recto para hombre en color azul.",
+                    price: 49.99,
+                    image: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+                    category: "men"
+                },
+                {
+                    id: 4,
+                    name: "Abrigo Invierno",
+                    description: "Abrigo cálido para mujer para los días fríos.",
+                    price: 79.99,
+                    image: "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+                    category: "women"
+                },
+                {
+                    id: 5,
+                    name: "Zapatos Deportivos",
+                    description: "Zapatillas cómodas para correr o caminar.",
+                    price: 59.99,
+                    image: "https://images.unsplash.com/photo-1527719327859-c6ce80353573?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+                    category: "unisex"
+                },
+                {
+                    id: 6,
+                    name: "Bolso Elegante",
+                    description: "Bolso de mano para mujer en cuero sintético.",
+                    price: 45.99,
+                    image: "https://images.unsplash.com/photo-1576566588028-4147f3842f27?ixlib=rb-1.2.1&auto=format&fit=crop&w=600&q=80",
+                    category: "women"
+                }
+            ];
 
-        // Carrito de compras
-        let cart = [];
-        
-        // DOM Ready
-        document.addEventListener('DOMContentLoaded', function() {
-            // Renderizar productos
-            renderProducts();
+            // Carrito de compras
+            let cart = JSON.parse(localStorage.getItem('modaFicticiaCart')) || [];
             
-            // Eventos
-            document.getElementById('shopNowBtn').addEventListener('click', function() {
-                alert('Redirigiendo a la colección 2023');
-                // window.location.href = '#featuredProducts';
-            });
+            // Elementos del DOM
+            const DOM = {
+                featuredProducts: document.getElementById('featuredProducts'),
+                cartCount: document.querySelector('.cart-count'),
+                cartItems: document.getElementById('cartItems'),
+                cartTotal: document.getElementById('cartTotal'),
+                shopNowBtn: document.getElementById('shopNowBtn'),
+                searchForm: document.getElementById('searchForm'),
+                newsletterForm: document.getElementById('newsletterForm'),
+                checkoutBtn: document.getElementById('checkoutBtn')
+            };
             
-            document.querySelector('.search-btn').addEventListener('click', function() {
-                const searchModal = new bootstrap.Modal(document.getElementById('searchModal'));
-                searchModal.show();
-            });
-            
-            document.getElementById('searchForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const searchTerm = this.querySelector('input').value.toLowerCase();
-                const results = products.filter(product => 
-                    product.name.toLowerCase().includes(searchTerm) || 
-                    product.description.toLowerCase().includes(searchTerm);
+            // Métodos públicos
+            return {
+                init: function() {
+                    this.renderProducts();
+                    this.setupEventListeners();
+                    this.updateCart();
+                },
                 
-                if(results.length > 0) {
-                    renderProducts(results);
-                } else {
-                    alert('No se encontraron productos que coincidan con tu búsqueda');
-                }
-                
-                bootstrap.Modal.getInstance(document.getElementById('searchModal')).hide();
-            });
-            
-            document.getElementById('newsletterForm').addEventListener('submit', function(e) {
-                e.preventDefault();
-                const email = this.querySelector('input').value;
-                alert(`Gracias por suscribirte con el correo: ${email}`);
-                this.reset();
-            });
-            
-            document.querySelectorAll('.view-category').forEach(button => {
-                button.addEventListener('click', function() {
-                    const categoryCard = this.closest('.category-card');
-                    const category = categoryCard.dataset.category;
-                    const filteredProducts = products.filter(product => product.category === category);
-                    renderProducts(filteredProducts);
+                renderProducts: function(productsToRender = products) {
+                    DOM.featuredProducts.innerHTML = '';
                     
-                    // Scroll suave a productos
-                    document.getElementById('featuredProducts').scrollIntoView({ behavior: 'smooth' });
-                });
-            });
-            
-            document.getElementById('checkoutBtn').addEventListener('click', function() {
-                if(cart.length > 0) {
-                    alert('Procediendo al pago...');
-                    // Aquí iría la lógica real de checkout
-                } else {
-                    alert('Tu carrito está vacío');
-                }
-            });
-        });
-        
-        // Función para renderizar productos
-        function renderProducts(productsToRender = products) {
-            const productsContainer = document.getElementById('featuredProducts');
-            productsContainer.innerHTML = '';
-            
-            productsToRender.forEach(product => {
-                const productCard = document.createElement('div');
-                productCard.className = 'col-md-4 col-sm-6';
-                productCard.innerHTML = `
-                    <div class="card">
-                        <img src="${product.image}" class="card-img-top product-img" alt="${product.name}">
-                        <div class="card-body">
-                            <h5 class="card-title">${product.name}</h5>
-                            <p class="card-text">${product.description}</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <span class="h5">$${product.price.toFixed(2)}</span>
-                                <button class="btn btn-primary add-to-cart" data-id="${product.id}">Añadir al carrito</button>
-                            </div>
-                        </div>
-                    </div>
-                `;
-                productsContainer.appendChild(productCard);
-            });
-            
-            // Agregar eventos a los botones de añadir al carrito
-            document.querySelectorAll('.add-to-cart').forEach(button => {
-                button.addEventListener('click', function() {
-                    const productId = parseInt(this.dataset.id);
-                    addToCart(productId);
-                });
-            });
-        }
-        
-        // Función para añadir productos al carrito
-        function addToCart(productId) {
-            const product = products.find(p => p.id === productId);
-            const existingItem = cart.find(item => item.id === productId);
-            
-            if(existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                cart.push({
-                    id: product.id,
-                    name: product.name,
-                    price: product.price,
-                    quantity: 1
-                });
-            }
-            
-            updateCart();
-            
-            // Mostrar notificación
-            const toast = document.createElement('div');
-            toast.className = 'position-fixed bottom-0 end-0 p-3';
-            toast.style.zIndex = '11';
-            toast.innerHTML = `
-                <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
-                    <div class="toast-header">
-                        <strong class="me-auto">Producto añadido</strong>
-                        <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
-                    </div>
-                    <div class="toast-body">
-                        ${product.name} ha sido añadido al carrito.
-                    </div>
-                </div>
-            `;
-            document.body.appendChild(toast);
-            
-            // Eliminar la notificación después de 3 segundos
-            setTimeout(() => {
-                toast.remove();
-            }, 3000);
-        }
-        
-        // Función para actualizar el carrito
-        function updateCart() {
-            const cartCount = document.querySelector('.cart-count');
-            const cartItems = document.getElementById('cartItems');
-            const cartTotal = document.getElementById('cartTotal');
-            
-            // Actualizar contador
-            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
-            cartCount.textContent = totalItems;
-            
-            // Actualizar modal del carrito
-            if(cart.length === 0) {
-                cartItems.innerHTML = '<p class="text-center">Tu carrito está vacío</p>';
-                cartTotal.textContent = '$0.00';
-            } else {
-                let itemsHTML = '';
-                let total = 0;
-                
-                cart.forEach(item => {
-                    const itemTotal = item.price * item.quantity;
-                    total += itemTotal;
+                    const fragment = document.createDocumentFragment();
                     
-                    itemsHTML += `
-                        <div class="d-flex justify-content-between align-items-center mb-3">
-                            <div>
-                                <h6>${item.name}</h6>
-                                <small>$${item.price.toFixed(2)} x ${item.quantity}</small>
+                    productsToRender.forEach(product => {
+                        const productCard = document.createElement('div');
+                        productCard.className = 'col-md-4 col-sm-6';
+                        productCard.innerHTML = `
+                            <div class="card">
+                                <img src="${product.image}" class="card-img-top product-img" alt="${product.name}" loading="lazy">
+                                <div class="card-body">
+                                    <h5 class="card-title">${product.name}</h5>
+                                    <p class="card-text">${product.description}</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="h5">$${product.price.toFixed(2)}</span>
+                                        <button class="btn btn-primary add-to-cart" data-id="${product.id}">Añadir al carrito</button>
+                                    </div>
+                                </div>
                             </div>
-                            <div>
-                                <span class="fw-bold">$${itemTotal.toFixed(2)}</span>
-                                <button class="btn btn-sm btn-outline-danger ms-2 remove-item" data-id="${item.id}">
-                                    <i class="fas fa-trash"></i>
-                                </button>
+                        `;
+                        fragment.appendChild(productCard);
+                    });
+                    
+                    DOM.featuredProducts.appendChild(fragment);
+                    this.setupProductEvents();
+                },
+                
+                setupEventListeners: function() {
+                    // Evento para el botón "Comprar Ahora"
+                    DOM.shopNowBtn?.addEventListener('click', () => {
+                        alert('Redirigiendo a la colección 2023');
+                    });
+                    
+                    // Evento para el formulario de búsqueda
+                    DOM.searchForm?.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        const searchTerm = this.searchForm.querySelector('input').value.toLowerCase();
+                        const results = products.filter(product => 
+                            product.name.toLowerCase().includes(searchTerm) || 
+                            product.description.toLowerCase().includes(searchTerm)
+                        );
+                        
+                        if(results.length > 0) {
+                            this.renderProducts(results);
+                        } else {
+                            alert('No se encontraron productos que coincidan con tu búsqueda');
+                        }
+                        
+                        bootstrap.Modal.getInstance(document.getElementById('searchModal')).hide();
+                    });
+                    
+                    // Evento para el formulario de newsletter
+                    DOM.newsletterForm?.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        const email = this.newsletterForm.querySelector('input').value;
+                        alert(`Gracias por suscribirte con el correo: ${email}`);
+                        this.newsletterForm.reset();
+                    });
+                    
+                    // Evento para los botones de categoría
+                    document.querySelectorAll('.view-category').forEach(button => {
+                        button.addEventListener('click', () => {
+                            const categoryCard = button.closest('.category-card');
+                            const category = categoryCard.dataset.category;
+                            const filteredProducts = products.filter(product => product.category === category);
+                            this.renderProducts(filteredProducts);
+                            
+                            // Scroll suave a productos
+                            DOM.featuredProducts.scrollIntoView({ behavior: 'smooth' });
+                        });
+                    });
+                    
+                    // Evento para el botón de checkout
+                    DOM.checkoutBtn?.addEventListener('click', () => {
+                        if(cart.length > 0) {
+                            alert('Procediendo al pago...');
+                        } else {
+                            alert('Tu carrito está vacío');
+                        }
+                    });
+                    
+                    // Evento para el botón de búsqueda
+                    document.querySelector('.search-btn')?.addEventListener('click', () => {
+                        const searchModal = new bootstrap.Modal(document.getElementById('searchModal'));
+                        searchModal.show();
+                    });
+                },
+                
+                setupProductEvents: function() {
+                    // Agregar eventos a los botones de añadir al carrito
+                    document.querySelectorAll('.add-to-cart').forEach(button => {
+                        button.addEventListener('click', () => {
+                            const productId = parseInt(button.dataset.id);
+                            this.addToCart(productId);
+                        });
+                    });
+                },
+                
+                addToCart: function(productId) {
+                    const product = products.find(p => p.id === productId);
+                    const existingItem = cart.find(item => item.id === productId);
+                    
+                    if(existingItem) {
+                        existingItem.quantity += 1;
+                    } else {
+                        cart.push({
+                            id: product.id,
+                            name: product.name,
+                            price: product.price,
+                            quantity: 1
+                        });
+                    }
+                    
+                    this.updateCart();
+                    this.showToast(`${product.name} ha sido añadido al carrito.`);
+                    this.saveCartToLocalStorage();
+                },
+                
+                removeFromCart: function(productId) {
+                    cart = cart.filter(item => item.id !== productId);
+                    this.updateCart();
+                    this.saveCartToLocalStorage();
+                },
+                
+                updateCart: function() {
+                    // Actualizar contador
+                    const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+                    DOM.cartCount.textContent = totalItems;
+                    
+                    // Actualizar modal del carrito
+                    if(cart.length === 0) {
+                        DOM.cartItems.innerHTML = '<p class="text-center">Tu carrito está vacío</p>';
+                        DOM.cartTotal.textContent = '$0.00';
+                    } else {
+                        let itemsHTML = '';
+                        let total = 0;
+                        
+                        cart.forEach(item => {
+                            const itemTotal = item.price * item.quantity;
+                            total += itemTotal;
+                            
+                            itemsHTML += `
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <div>
+                                        <h6>${item.name}</h6>
+                                        <small>$${item.price.toFixed(2)} x ${item.quantity}</small>
+                                    </div>
+                                    <div>
+                                        <span class="fw-bold">$${itemTotal.toFixed(2)}</span>
+                                        <button class="btn btn-sm btn-outline-danger ms-2 remove-item" data-id="${item.id}">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                        
+                        DOM.cartItems.innerHTML = itemsHTML;
+                        DOM.cartTotal.textContent = `$${total.toFixed(2)}`;
+                        
+                        // Agregar eventos a los botones de eliminar
+                        document.querySelectorAll('.remove-item').forEach(button => {
+                            button.addEventListener('click', () => {
+                                const itemId = parseInt(button.dataset.id);
+                                this.removeFromCart(itemId);
+                            });
+                        });
+                    }
+                },
+                
+                showToast: function(message) {
+                    const toast = document.createElement('div');
+                    toast.className = 'position-fixed bottom-0 end-0 p-3';
+                    toast.style.zIndex = '11';
+                    toast.innerHTML = `
+                        <div class="toast show" role="alert" aria-live="assertive" aria-atomic="true">
+                            <div class="toast-header">
+                                <strong class="me-auto">Producto añadido</strong>
+                                <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+                            </div>
+                            <div class="toast-body">
+                                ${message}
                             </div>
                         </div>
                     `;
-                });
+                    document.body.appendChild(toast);
+                    
+                    // Eliminar la notificación después de 3 segundos
+                    setTimeout(() => {
+                        toast.remove();
+                    }, 3000);
+                },
                 
-                cartItems.innerHTML = itemsHTML;
-                cartTotal.textContent = `$${total.toFixed(2)}`;
-                
-                // Agregar eventos a los botones de eliminar
-                document.querySelectorAll('.remove-item').forEach(button => {
-                    button.addEventListener('click', function() {
-                        const itemId = parseInt(this.dataset.id);
-                        removeFromCart(itemId);
-                    });
-                });
-            }
-        }
-        
-        // Función para eliminar productos del carrito
-        function removeFromCart(productId) {
-            cart = cart.filter(item => item.id !== productId);
-            updateCart();
+                saveCartToLocalStorage: function() {
+                    localStorage.setItem('modaFicticiaCart', JSON.stringify(cart));
+                }
+            };
+        })();
+
+        // Inicializar la aplicación cuando el DOM esté listo
+        document.addEventListener('DOMContentLoaded', () => {
+            ModaFicticia.init();
+        });
+
+        // Cargar Bootstrap cuando esté disponible
+        if (typeof bootstrap === 'undefined') {
+            const script = document.createElement('script');
+            script.src = 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js';
+            script.async = true;
+            document.body.appendChild(script);
         }
     </script>
 </body>
